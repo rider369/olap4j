@@ -22,6 +22,7 @@ import org.olap4j.driver.xmla.proxy.XmlaOlap4jProxy;
 
 import java.sql.*;
 import java.util.*;
+import java.util.concurrent.Executor;
 
 /**
  * Implementation of {@link Factory} for JDBC 4.0.
@@ -108,6 +109,16 @@ class FactoryJdbc4Impl implements Factory {
         {
             super(olap4jConnection, headerList, rowList);
         }
+
+        @Override
+        public <T> T getObject(int columnIndex, Class<T> type) throws SQLException {
+            return null;
+        }
+
+        @Override
+        public <T> T getObject(String columnLabel, Class<T> type) throws SQLException {
+            return null;
+        }
     }
 
     private static class XmlaOlap4jConnectionJdbc4
@@ -132,6 +143,21 @@ class FactoryJdbc4Impl implements Factory {
         {
             super(factory, driver, proxy, url, info);
         }
+
+        @Override
+        public void abort(Executor executor) throws SQLException {
+
+        }
+
+        @Override
+        public void setNetworkTimeout(Executor executor, int milliseconds) throws SQLException {
+
+        }
+
+        @Override
+        public int getNetworkTimeout() throws SQLException {
+            return 0;
+        }
     }
 
     private static class XmlaOlap4jCellSetJdbc4
@@ -149,6 +175,16 @@ class FactoryJdbc4Impl implements Factory {
         {
             super(olap4jStatement);
         }
+
+        @Override
+        public <T> T getObject(int columnIndex, Class<T> type) throws SQLException {
+            return null;
+        }
+
+        @Override
+        public <T> T getObject(String columnLabel, Class<T> type) throws SQLException {
+            return null;
+        }
     }
 
     private static class XmlaOlap4jStatementJdbc4
@@ -163,6 +199,16 @@ class FactoryJdbc4Impl implements Factory {
             XmlaOlap4jConnection olap4jConnection)
         {
             super(olap4jConnection);
+        }
+
+        @Override
+        public void closeOnCompletion() throws SQLException {
+
+        }
+
+        @Override
+        public boolean isCloseOnCompletion() throws SQLException {
+            return false;
         }
     }
 
@@ -182,6 +228,16 @@ class FactoryJdbc4Impl implements Factory {
         {
             super(olap4jConnection, mdx);
         }
+
+        @Override
+        public void closeOnCompletion() throws SQLException {
+
+        }
+
+        @Override
+        public boolean isCloseOnCompletion() throws SQLException {
+            return false;
+        }
     }
 
     private static class XmlaOlap4jDatabaseMetaDataJdbc4
@@ -196,6 +252,16 @@ class FactoryJdbc4Impl implements Factory {
             XmlaOlap4jConnection olap4jConnection)
         {
             super(olap4jConnection);
+        }
+
+        @Override
+        public ResultSet getPseudoColumns(String catalog, String schemaPattern, String tableNamePattern, String columnNamePattern) throws SQLException {
+            return null;
+        }
+
+        @Override
+        public boolean generatedKeyAlwaysReturned() throws SQLException {
+            return false;
         }
     }
 }
